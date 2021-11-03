@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  pokemonPoc
+
+  Created by Alessandro Marcon on 03/11/21.
+  
+*/
+
+"error_404" = "Ops, something went wrong. Error code 404, message: '%@'";
+"explicitly_cancelled_error" = "Request explicitly cancelled.";
+"generic_error_code_msg" = "Ops, something went wrong. Error code '%@', message: '%@'";
+"json_error" = "JSON serialization error";
+"data_nil_error" = "Response data is nil.";
+"timeout_error" = "HTTP Timeout";
+"offline_error" = "You seems to be offline. Check your internet connection and try again.";

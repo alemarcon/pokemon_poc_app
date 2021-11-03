@@ -13,6 +13,8 @@
 		2DBF81812733396E008BB75E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF817F2733396E008BB75E /* Main.storyboard */; };
 		2DBF818327333970008BB75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF818227333970008BB75E /* Assets.xcassets */; };
 		2DBF818627333970008BB75E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF818427333970008BB75E /* LaunchScreen.storyboard */; };
+		2DBF819627333BC8008BB75E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBF819527333BC8008BB75E /* Configuration.swift */; };
+		2DBF819927333BF2008BB75E /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBF819827333BF2008BB75E /* ConsoleLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,9 @@
 		2DBF818227333970008BB75E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DBF818527333970008BB75E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DBF818727333970008BB75E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DBF819427333BB2008BB75E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		2DBF819527333BC8008BB75E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		2DBF819827333BF2008BB75E /* ConsoleLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +61,82 @@
 		2DBF81782733396E008BB75E /* pokemonPoc */ = {
 			isa = PBXGroup;
 			children = (
-				2DBF81792733396E008BB75E /* AppDelegate.swift */,
-				2DBF817B2733396E008BB75E /* SceneDelegate.swift */,
+				2DBF818D27333A93008BB75E /* AppDelegate */,
+				2DBF819227333B96008BB75E /* Application */,
+				2DBF818F27333B48008BB75E /* Presentation */,
+				2DBF818E27333AB2008BB75E /* Plist */,
+				2DBF819727333BE2008BB75E /* Utility */,
 				2DBF817D2733396E008BB75E /* ViewController.swift */,
-				2DBF817F2733396E008BB75E /* Main.storyboard */,
 				2DBF818227333970008BB75E /* Assets.xcassets */,
-				2DBF818427333970008BB75E /* LaunchScreen.storyboard */,
-				2DBF818727333970008BB75E /* Info.plist */,
 			);
 			path = pokemonPoc;
+			sourceTree = "<group>";
+		};
+		2DBF818D27333A93008BB75E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF81792733396E008BB75E /* AppDelegate.swift */,
+				2DBF817B2733396E008BB75E /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2DBF818E27333AB2008BB75E /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF818727333970008BB75E /* Info.plist */,
+			);
+			path = Plist;
+			sourceTree = "<group>";
+		};
+		2DBF818F27333B48008BB75E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF819127333B85008BB75E /* Controller */,
+				2DBF819027333B5A008BB75E /* Storyboard */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		2DBF819027333B5A008BB75E /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF817F2733396E008BB75E /* Main.storyboard */,
+				2DBF818427333970008BB75E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		2DBF819127333B85008BB75E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2DBF819227333B96008BB75E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF819327333B9F008BB75E /* Configuration */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		2DBF819327333B9F008BB75E /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF819427333BB2008BB75E /* Config.xcconfig */,
+				2DBF819527333BC8008BB75E /* Configuration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		2DBF819727333BE2008BB75E /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2DBF819827333BF2008BB75E /* ConsoleLogger.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +209,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DBF819927333BF2008BB75E /* ConsoleLogger.swift in Sources */,
 				2DBF817E2733396E008BB75E /* ViewController.swift in Sources */,
 				2DBF817A2733396E008BB75E /* AppDelegate.swift in Sources */,
+				2DBF819627333BC8008BB75E /* Configuration.swift in Sources */,
 				2DBF817C2733396E008BB75E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +241,7 @@
 /* Begin XCBuildConfiguration section */
 		2DBF818827333970008BB75E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DBF819427333BB2008BB75E /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -216,7 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -228,6 +303,7 @@
 		};
 		2DBF818927333970008BB75E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DBF819427333BB2008BB75E /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -271,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -288,7 +364,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GB5KHBW76F;
-				INFOPLIST_FILE = pokemonPoc/Info.plist;
+				INFOPLIST_FILE = pokemonPoc/Plist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +383,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GB5KHBW76F;
-				INFOPLIST_FILE = pokemonPoc/Info.plist;
+				INFOPLIST_FILE = pokemonPoc/Plist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

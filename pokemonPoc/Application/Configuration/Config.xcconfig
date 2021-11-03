@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  pokemonPoc
+//
+//  Created by Alessandro Marcon on 03/11/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_BASE_URL = https:/$()/api.musixmatch.com/ws/1.1/

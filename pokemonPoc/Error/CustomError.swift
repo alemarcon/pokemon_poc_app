@@ -15,9 +15,6 @@ enum CustomErrorCode: Int {
     case dataNil = 800
     case timeout = 900
     case noConnection = 1000
-    case noUserFoundOnDatabase = 1100
-    case noCurrentUserLoggedIn = 1101
-    case noLyricsFound = 1200
 }
 
 

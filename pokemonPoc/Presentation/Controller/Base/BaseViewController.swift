@@ -34,7 +34,7 @@ class BaseViewController: UIViewController {
         
         view.addSubview(activityIndicator)
 
-        activityIndicator.color = .white
+        activityIndicator.color = .gray
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

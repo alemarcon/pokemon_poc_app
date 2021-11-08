@@ -12,15 +12,15 @@ class ViewModelAssembly: Assembly {
     
     func assemble(container: Container) {
         
-//        container.register(SplashViewModel.self) { resolver in
-//            
-//            guard let useCase = resolver.resolve(SplashUseCase.self) else {
-//                fatalError("Assembler was unable to resolve SplashUseCaseDefault")
-//            }
-//            
-//            let viewModel = SplashViewModelDefault(useCase: useCase)
-//
-//            return viewModel
-//        }.inObjectScope(.transient)
+        container.register(PokemonListViewModel.self) { resolver in
+            
+            guard let useCase = resolver.resolve(PokemonListUseCase.self) else {
+                fatalError("Assembler was unable to resolve PokemonListUseCase")
+            }
+            
+            let viewModel = PokemonListViewModelDefault(useCase: useCase)
+
+            return viewModel
+        }.inObjectScope(.transient)
     }
 }

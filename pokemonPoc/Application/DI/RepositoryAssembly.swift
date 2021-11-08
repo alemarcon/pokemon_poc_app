@@ -12,14 +12,14 @@ class RepositoryAssembly: Assembly {
     
     func assemble(container: Container) {
 
-//        container.register(TrackRepository.self) { resolver in
-//
-//            guard let request = resolver.resolve(TrackRequest.self) else {
-//                fatalError("Assembler was unable to resolve TrackRequest")
-//            }
-//            let repository = TrackRepositoryDefault(request: request)
-//
-//            return repository
-//        }.inObjectScope(.transient)
+        container.register(PokemonRepository.self) { resolver in
+
+            guard let request = resolver.resolve(PokemonRequest.self) else {
+                fatalError("Assembler was unable to resolve PokemonRequest")
+            }
+            let repository = PokemonRepositoryDefault(request: request)
+
+            return repository
+        }.inObjectScope(.transient)
     }
 }

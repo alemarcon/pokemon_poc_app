@@ -17,9 +17,21 @@ enum API {
             baseEndpoint = try Configuration.value(for: "API_BASE_URL") as String
         } catch(let error) {
             LOGE("Configuration error => \(error)")
-            baseEndpoint = "https://api.musixmatch.com/ws/1.1/"
+            baseEndpoint = "https://pokeapi.co/api/v2/"
         }
         return baseEndpoint
+    }
+    
+    /// Get base image endpoint
+    static var baseImageURL: String {
+        var baseImageEndpoint = ""
+        do {
+            baseImageEndpoint = try Configuration.value(for: "BASE_IMAGE_URL") as String
+        } catch(let error) {
+            LOGE("Configuration error => \(error)")
+            baseImageEndpoint = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        }
+        return baseImageEndpoint
     }
 
 }

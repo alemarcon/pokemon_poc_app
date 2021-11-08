@@ -6,12 +6,29 @@
 //
 
 import UIKit
+import Swinject
 
 class SplashViewController: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Added 0.5 seconds of delay just to show splash screen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.loadMainView()
+        }
+        
     }
-
+    
+    /// Load main view controller
+    fileprivate func loadMainView() {
+        guard let controller = Assembler.sharedAssembler.resolver.resolve(PokemonListViewController.self) else {
+            LOGE("Unable to resolve PokemonListViewController")
+            return
+        }
+        
+        let nvc: UINavigationController = UINavigationController(rootViewController: controller)
+        nvc.navigationItem.largeTitleDisplayMode = .always
+        nvc.title = "Pokemon List"
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = nvc
+    }
 }

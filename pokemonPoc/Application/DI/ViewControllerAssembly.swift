@@ -20,6 +20,15 @@ class ViewControllerAssembly: Assembly {
             guard let controller: SplashViewController = UIStoryboard(.Splash).instantiateViewController(withIdentifier: ViewControllerIds.splash_vc.rawValue) as? SplashViewController else {
                 fatalError("Assembler was unable to resolve SplashViewController")
             }
+            return controller
+        }.inObjectScope(.transient)
+        
+        container.register(PokemonListViewController.self) { resolver in
+            guard let viewModel = resolver.resolve(PokemonListViewModel.self) else {
+                fatalError("Assembler was unable to resolve PokemonListViewModel")
+            }
+            
+            let controller = PokemonListViewController(viewModel: viewModel)
             
             return controller
         }.inObjectScope(.transient)

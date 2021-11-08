@@ -14,7 +14,9 @@ enum CustomErrorCode: Int {
     case jsonSerialization = 700
     case dataNil = 800
     case timeout = 900
-    case noConnection = 1000
+    case noConnection = -1009
+    case databaseSaveError = 1100
+    case noSavedObjectFound = 1101
 }
 
 
@@ -35,6 +37,10 @@ enum CustomError: Error {
     case timeout
     /// Error throws in case of missing internet connection
     case noConnection
+    /// Error throws in case of database saving function error
+    case databaseSaveError
+    /// Error throws when trying to retrieve object from database before they will be saved
+    case noSavedObjectFound
 }
 
 extension CustomError: LocalizedError {
@@ -62,6 +68,10 @@ extension CustomError: LocalizedError {
             return NSLocalizedString(Localized.timeout_error.rawValue, comment: "")
         case .noConnection:
             return NSLocalizedString(Localized.offline_error.rawValue, comment: "")
+        case .databaseSaveError:
+            return NSLocalizedString(Localized.database_save_error.rawValue, comment: "")
+        case .noSavedObjectFound:
+            return NSLocalizedString(Localized.no_saved_data_found.rawValue, comment: "")
         }
         
     }
@@ -82,6 +92,10 @@ extension CustomError: LocalizedError {
             return .timeout
         case .noConnection:
             return .noConnection
+        case .databaseSaveError:
+            return .databaseSaveError
+        case .noSavedObjectFound:
+            return .noSavedObjectFound
         }
     }
 }

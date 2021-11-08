@@ -20,7 +20,8 @@ extension Assembler {
             ViewModelAssembly(),
             RepositoryAssembly(),
             UseCaseAssembly(),
-            NetworkAssembly()
+            NetworkAssembly(),
+            DatabaseAssembly()
         ], container: container)
         
         return assembler

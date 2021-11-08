@@ -9,7 +9,7 @@ import Foundation
 
 struct PokemonListResponseDTOMapper {
     
-    static func mapDtoArrayToModelArray(pokemons: PokemonListResponseDTO) -> PokemonsModel {
+    static func mapDtoToModel(pokemons: PokemonListResponseDTO) -> PokemonsModel {
         var model = PokemonsModel()
         
         model.count = pokemons.count ?? 0
@@ -26,6 +26,22 @@ struct PokemonListResponseDTOMapper {
     }
     
     
+    static func mapDtoToEntity(pokemons: PokemonListResponseDTO) -> PokemonListObject {
+        let model = PokemonListObject()
+        
+        model.next = pokemons.next
+        model.prev = pokemons.previous
+        
+        if let result = pokemons.results {
+            for item in result {
+                model.pokemon.append( PokemonListItemResponseDTOMapper.mapDtoArrayToEntityArray(pokemon: item) )
+            }
+        }
+        
+        return model
+    }
+    
+    
 }
 
 struct PokemonListItemResponseDTOMapper {
@@ -35,6 +51,19 @@ struct PokemonListItemResponseDTOMapper {
         
         if let url = pokemon.url {
             model.id = getPokemonID(url: url)
+            model.detailUrl = url
+        }
+        model.name = pokemon.name ?? ""
+        
+        
+        return model
+    }
+    
+    static func mapDtoArrayToEntityArray(pokemon: PokemonListItemDTO) -> PokemonItemObject {
+        let model = PokemonItemObject()
+        
+        if let url = pokemon.url {
+            model.pokemonId = getPokemonID(url: url)
             model.detailUrl = url
         }
         model.name = pokemon.name ?? ""

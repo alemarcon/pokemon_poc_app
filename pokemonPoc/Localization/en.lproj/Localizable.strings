@@ -13,3 +13,5 @@
 "data_nil_error" = "Response data is nil.";
 "timeout_error" = "HTTP Timeout";
 "offline_error" = "You seems to be offline. Check your internet connection and try again.";
+"database_save_error" = "An error occurred during database pokemon list saving";
+"no_saved_data_found" = "No saved data found on database.";

@@ -10,6 +10,7 @@ import Foundation
 protocol PokemonRepository {
     
     var request: PokemonRequest? { get }
+    var dbRequest: PokemonListRequestDB? { get }
     
     /// Search user by username
     /// - Parameters:

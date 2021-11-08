@@ -17,7 +17,12 @@ class NetworkRequestPerformer {
             
             guard error == nil else {
                 LOGE("Error \(error!.localizedDescription)")
-                failure(CustomError.generic(0, error!.localizedDescription))
+                
+                if( error!._code == CustomErrorCode.noConnection.rawValue ) {
+                    failure(CustomError.noConnection)
+                } else {
+                    failure(CustomError.generic(0, error!.localizedDescription))
+                }
                 return
             }
             

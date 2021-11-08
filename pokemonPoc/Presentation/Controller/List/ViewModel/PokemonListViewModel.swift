@@ -69,7 +69,12 @@ extension PokemonListViewModelDefault: PokemonListUseCaseDelegate {
         if( pokemonList == nil ) {
             self.pokemonList = [PokemonItemModel]()
         }
-        self.pokemonList?.append(contentsOf: pokemon.pokemonList)
+        
+        for p in pokemon.pokemonList {
+            if( !(pokemonList?.contains(where: { $0.id == p.id }) ?? false) ) {
+                self.pokemonList?.append(p)
+            }
+        }
         status.value = .pokemonLoadingSuccess
     }
     

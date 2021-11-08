@@ -17,7 +17,12 @@ class RepositoryAssembly: Assembly {
             guard let request = resolver.resolve(PokemonRequest.self) else {
                 fatalError("Assembler was unable to resolve PokemonRequest")
             }
-            let repository = PokemonRepositoryDefault(request: request)
+            
+            guard let dbRequest = resolver.resolve(PokemonListRequestDB.self) else {
+                fatalError("Assembler was unable to resolve PokemonListRequestDB")
+            }
+            
+            let repository = PokemonRepositoryDefault(request: request, dbRequest: dbRequest)
 
             return repository
         }.inObjectScope(.transient)

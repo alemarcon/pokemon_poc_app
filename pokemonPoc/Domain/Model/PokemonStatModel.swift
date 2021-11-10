@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct PokemonStatModel {
+class PokemonStatModel: DetailItem {
+    var type: DetailType
     var baseStat: Int
     var statName: String
     
     init() {
+        type = .stats
         baseStat = 0
         statName = ""
     }

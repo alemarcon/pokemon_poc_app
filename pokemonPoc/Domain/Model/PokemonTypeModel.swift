@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct PokemonTypeModel {
+struct PokemonTypeModel: DetailItem {
+    
+    var type: DetailType
     var slot: Int
     var name: String
     
     init() {
         slot = 0
         name = ""
+        type = .category
     }
 }

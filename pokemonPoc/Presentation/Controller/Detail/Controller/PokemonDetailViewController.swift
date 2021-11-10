@@ -45,8 +45,10 @@ class PokemonDetailViewController: BaseViewController {
         pokemonDataTable = UITableView()
         pokemonDataTable.translatesAutoresizingMaskIntoConstraints = false
         pokemonDataTable.allowsMultipleSelection = false
-//        pokemonDataTable.dataSource = self
-        pokemonDataTable.register(PokemonListTableViewCell.self, forCellReuseIdentifier: PokemonListTableViewCell.IDENTIFIER)
+        pokemonDataTable.dataSource = self
+        pokemonDataTable.rowHeight = UITableView.automaticDimension
+        pokemonDataTable.estimatedRowHeight = 44.0
+        pokemonDataTable.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.IDENTIFIER)
         view.addSubview(pokemonDataTable)
 
         view.addConstraints([
@@ -66,13 +68,14 @@ class PokemonDetailViewController: BaseViewController {
             viewModel.status.bind(to: view) { [weak self] activity, _ in
                 switch viewModel.status.value {
                 case .none:
-                    LOGD("Reload games table")
+                    LOGD("None")
                 case .pokemonDetailLoading:
                     self?.showLoadingActivity()
                 case .pokemonDetailLoadingFail:
                     LOGE("Pokemon loading fails")
                     self?.hideLoadingActivity()
                 case .pokemonDetailLoadingSuccess:
+                    LOGD("Loading succeded.")
                     self?.hideLoadingActivity()
                     self?.updateUIData()
                 }
@@ -83,7 +86,37 @@ class PokemonDetailViewController: BaseViewController {
     }
     
     func updateUIData() {
+        LOGD("Update UI")
         pokemonName.text = viewModel?.getPokemonName() ?? ""
+        pokemonDataTable.reloadData()
     }
 }
 
+extension PokemonDetailViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.detail?.items.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let item = viewModel?.detail?.items[indexPath.row] {
+            switch item.type {
+            case .unknow:
+                return UITableViewCell()
+            case .image:
+                guard let currentCell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.IDENTIFIER, for: indexPath) as? ImageTableViewCell else {
+                    return UITableViewCell()
+                }
+                currentCell.setupCell(images: item as! PokemonImageModel)
+                return currentCell
+            case .stats:
+                return UITableViewCell()
+            case .category:
+                return UITableViewCell()
+            }
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+}

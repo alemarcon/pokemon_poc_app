@@ -7,26 +7,13 @@
 
 import Foundation
 
-struct PokemonDetailModel: Hashable {
-    var id: String
+struct PokemonDetailModel {
     var name: String
-    var images: [PokemonImageModel]
-    var stats: [PokemonStatModel]
-    var type: [PokemonTypeModel]
+    var items: [DetailItem]
     
     init() {
-        id = ""
         name = ""
-        images = [PokemonImageModel]()
-        stats = [PokemonStatModel]()
-        type = [PokemonTypeModel]()
+        items = [DetailItem]()
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: PokemonDetailModel, rhs: PokemonDetailModel) -> Bool {
-        lhs.id == rhs.id
-    }
 }

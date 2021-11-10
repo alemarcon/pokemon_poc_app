@@ -15,26 +15,30 @@ struct PokemonDetailResponseDTOMapper {
         model.name = dto.name ?? ""
         
         if let sprites = dto.sprites {
+            
+            let images = PokemonImageModel()
+            
             if let frontDefault = sprites.frontDefault {
-                model.images.append( PokemonImageModel(url: frontDefault) )
+                images.url.append(frontDefault)
             }
             if let backDefault = sprites.backDefault {
-                model.images.append( PokemonImageModel(url: backDefault) )
+                images.url.append(backDefault)
             }
             if let frontShiny = sprites.frontShiny {
-                model.images.append( PokemonImageModel(url: frontShiny) )
+                images.url.append(frontShiny)
             }
             if let backShiny = sprites.backShiny {
-                model.images.append( PokemonImageModel(url: backShiny) )
+                images.url.append(backShiny)
             }
+            model.items.append(images)
         }
         
         if let stats = dto.stats {
-            model.stats = PokemonStatResponseDTOMapper.mapDtoArrayToModelArray(dtos: stats)
+            model.items.append(contentsOf: PokemonStatResponseDTOMapper.mapDtoArrayToModelArray(dtos: stats))
         }
         
         if let types = dto.types {
-            model.type = PokemonTypeElementResponseDTOMapper.mapDtoArrayToModelArray(dtos: types)
+            model.items.append(contentsOf: PokemonTypeElementResponseDTOMapper.mapDtoArrayToModelArray(dtos: types))
         }
         
         return model
@@ -46,8 +50,9 @@ struct PokemonDetailResponseDTOMapper {
 struct PokemonStatResponseDTOMapper {
     
     static func mapDtoToModel(dto: PokemonStatsResponseDTO) -> PokemonStatModel {
-        var model = PokemonStatModel()
+        let model = PokemonStatModel()
         
+        model.type = .stats
         model.baseStat = dto.baseStat ?? 0
         model.statName = dto.stat?.name ?? ""
         
@@ -71,6 +76,7 @@ struct PokemonTypeElementResponseDTOMapper {
     static func mapDtoToModel(dto: PokemonTypeElementeResponseDTO) -> PokemonTypeModel {
         var model = PokemonTypeModel()
         
+        model.type = .category
         model.slot = dto.slot ?? 0
         model.name = dto.type?.name ?? ""
         

@@ -13,7 +13,11 @@ class NetworkAssembly: Assembly {
     func assemble(container: Container) {
         
         container.register(PokemonRequest.self) { resolver in
-            return PokemonRequestDefault()
+            if( Assembler.type == .Test ) {
+                return PokemonDataRequestTest()
+            } else {
+                return PokemonRequestDefault()
+            }
         }.inObjectScope(.transient)
         
     }

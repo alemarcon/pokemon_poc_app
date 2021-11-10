@@ -74,7 +74,7 @@ class TextualTableViewCell: UITableViewCell {
         case .category:
             if let statItem = item as? PokemonTypeModel {
                 propertyName.text = statItem.name.capitalized
-                propertyValue.text = String(statItem.slot)
+                propertyValue.text = ""
             }
         default:
             propertyName.text = ""

@@ -12,14 +12,12 @@ struct PokemonDetailModel {
     var images: [PokemonImageModel]
     var stats: [PokemonStatModel]
     var category: [PokemonTypeModel]
-//    var items: [DetailItem]
     
     init() {
         name = ""
         images = [PokemonImageModel]()
         stats = [PokemonStatModel]()
         category = [PokemonTypeModel]()
-//        items = [DetailItem]()
     }
     
 }

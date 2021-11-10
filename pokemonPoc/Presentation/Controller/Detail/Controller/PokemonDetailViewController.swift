@@ -51,7 +51,6 @@ class PokemonDetailViewController: BaseViewController {
         pokemonDataTable.translatesAutoresizingMaskIntoConstraints = false
         pokemonDataTable.allowsMultipleSelection = false
         pokemonDataTable.dataSource = self
-//        pokemonDataTable.delegate = self
         pokemonDataTable.rowHeight = UITableView.automaticDimension
         pokemonDataTable.estimatedRowHeight = 44.0
         pokemonDataTable.showsVerticalScrollIndicator = false
@@ -179,9 +178,3 @@ extension PokemonDetailViewController: UITableViewDataSource {
     }
     
 }
-
-//extension PokemonDetailViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: false)
-//    }
-//}

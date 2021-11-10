@@ -22,5 +22,16 @@ class ViewModelAssembly: Assembly {
 
             return viewModel
         }.inObjectScope(.transient)
+        
+        container.register(PokemonDetailViewModel.self) { (resolver, path: String) in
+            
+            guard let useCase = resolver.resolve(PokemonDetailUseCase.self) else {
+                fatalError("Assembler was unable to resolve PokemonDetailUseCase")
+            }
+            
+            let viewModel = PokemonDetailViewModelDefault(useCase: useCase, detailPath: path)
+
+            return viewModel
+        }.inObjectScope(.transient)
     }
 }

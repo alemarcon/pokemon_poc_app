@@ -8,7 +8,8 @@
 import Foundation
 
 enum PokemonRouterType {
-    case list
+    case list(offset: String)
+    case detail(url: String)
 }
 
 struct PokemonRouter: APIConfiguration {
@@ -18,15 +19,18 @@ struct PokemonRouter: APIConfiguration {
     var queryItems: [URLQueryItem]?
     var requestHeader: [String : String]?
     
-    init(type: PokemonRouterType, offset: String) {
+    init(type: PokemonRouterType) {
         switch type {
-        case .list:
+        case .list(let offset):
             method = .get
             path = API.baseURL + "pokemon"
             queryItems = [
                 URLQueryItem(name: "offset", value: offset),
                 URLQueryItem(name: "limit", value: "20")
             ]
+        case .detail(let url):
+            method = .get
+            path = url
         }
     }
     

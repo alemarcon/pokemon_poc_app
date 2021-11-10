@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Swinject
 
 class PokemonListViewController: BaseViewController {
     
@@ -109,6 +110,10 @@ extension PokemonListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        LOGD("Selected")
+        if let path = viewModel?.pokemonList?[indexPath.row].detailUrl {
+            if let controller = Assembler.sharedAssembler.resolver.resolve(PokemonDetailViewController.self, argument: path) {
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
     }
 }

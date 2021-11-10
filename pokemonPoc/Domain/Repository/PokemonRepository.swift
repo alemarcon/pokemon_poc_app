@@ -9,14 +9,22 @@ import Foundation
 
 protocol PokemonRepository {
     
+    /// Network request
     var request: PokemonRequest? { get }
+    /// DB request
     var dbRequest: PokemonListRequestDB? { get }
     
-    /// Search user by username
+    /// <#Description#>
     /// - Parameters:
-    ///   - username: Username to search
-    ///   - success: Action fired in case of success
-    ///   - failure: Action fired in case of failure
+    ///   - offset: <#offset description#>
+    ///   - success: <#success description#>
+    ///   - failure: <#failure description#>
     func getPokemons(offset: String, success: @escaping (PokemonsModel)->Void, failure: @escaping (CustomError)->Void)
-
+    
+    /// <#Description#>
+    /// - Parameters:
+    ///   - path: <#path description#>
+    ///   - success: <#success description#>
+    ///   - failure: <#failure description#>
+    func getPokemonDetail(path: String, success: @escaping (PokemonDetailModel)->Void, failure: @escaping (CustomError)->Void)
 }

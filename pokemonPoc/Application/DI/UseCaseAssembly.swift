@@ -21,5 +21,15 @@ class UseCaseAssembly: Assembly {
             let useCase = PokemonListUseCaseDefault(repository: repository)
             return useCase
         }.inObjectScope(.transient)
+        
+        container.register(PokemonDetailUseCase.self) { resolver in
+            
+            guard let repository = resolver.resolve(PokemonRepository.self) else {
+                fatalError("Assembler was unable to resolve PokemonRepository")
+            }
+            
+            let useCase = PokemonDetailUseCaseDefault(repository: repository)
+            return useCase
+        }.inObjectScope(.transient)
     }
 }

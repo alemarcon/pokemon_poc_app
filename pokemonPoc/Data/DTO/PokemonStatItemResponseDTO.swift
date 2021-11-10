@@ -1,13 +1,13 @@
 //
-//  PokemonListItemDTO.swift
+//  PokemonStatItemResponseDTO.swift
 //  pokemonPoc
 //
-//  Created by Alessandro Marcon on 04/11/21.
+//  Created by Alessandro Marcon on 09/11/21.
 //
 
 import Foundation
 
-struct PokemonListItemDTO: Decodable {
+struct PokemonStatItemResponseDTO: Decodable {
     let name: String?
     let url: String?
 

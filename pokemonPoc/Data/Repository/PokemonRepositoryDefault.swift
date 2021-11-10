@@ -36,4 +36,12 @@ class PokemonRepositoryDefault: PokemonRepository {
         })
     }
     
+    func getPokemonDetail(path: String, success: @escaping (PokemonDetailModel) -> Void, failure: @escaping (CustomError) -> Void) {
+        request?.loadPokemonDetail(path: path, success: { (result: PokemonDetailResponseDTO) in
+            success( PokemonDetailResponseDTOMapper.mapDtoToModel(dto: result))
+        }, failure: { error in
+            failure(error)
+        })
+    }
+    
 }

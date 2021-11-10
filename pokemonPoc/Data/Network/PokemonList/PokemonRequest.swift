@@ -10,4 +10,5 @@ import Foundation
 protocol PokemonRequest {
     
     func loadPokemonList<T: Decodable>(offset: String, success: @escaping (T)->Void, failure: @escaping (CustomError)->Void)
+    func loadPokemonDetail<T: Decodable>(path: String, success: @escaping (T)->Void, failure: @escaping (CustomError)->Void)
 }

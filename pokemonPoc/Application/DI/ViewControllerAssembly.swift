@@ -32,5 +32,16 @@ class ViewControllerAssembly: Assembly {
             
             return controller
         }.inObjectScope(.transient)
+        
+        container.register(PokemonDetailViewController.self) { (resolver, detailPath: String) in
+            
+            guard let viewModel = resolver.resolve(PokemonDetailViewModel.self, argument: detailPath) else {
+                fatalError("Assembler was unable to resolve PokemonDetailViewModel")
+            }
+            
+            let controller = PokemonDetailViewController(viewModel: viewModel)
+            
+            return controller
+        }.inObjectScope(.transient)
     }
 }

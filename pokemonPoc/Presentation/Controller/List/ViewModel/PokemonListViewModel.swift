@@ -9,8 +9,9 @@ import Foundation
 import Bond
 
 protocol PokemonListViewModelInput {
-    /// Logout current user
+    /// Load pokemon
     func loadPokemon()
+    /// Load more pokemon (paginated query)
     func loadMorePokemon()
 }
 

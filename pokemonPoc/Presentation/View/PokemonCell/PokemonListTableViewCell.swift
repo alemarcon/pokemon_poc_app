@@ -25,6 +25,11 @@ class PokemonListTableViewCell: UITableViewCell {
         pokemonName.text = ""
     }
     
+    override func prepareForReuse() {
+        pokemonImage.image = nil
+        pokemonName.text = ""
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

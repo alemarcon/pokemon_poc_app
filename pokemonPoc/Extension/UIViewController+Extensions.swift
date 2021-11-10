@@ -19,7 +19,7 @@ extension UIViewController {
     
     /// Selector method called to hide keyboard when open
     ///
-    /// - Parameter sender: il sender della gesture
+    /// - Parameter sender: Gesture sender
     @objc private func closeKeyboard() {
         self.view.endEditing(true)
     }

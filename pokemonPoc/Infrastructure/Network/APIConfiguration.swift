@@ -23,5 +23,6 @@ protocol APIConfiguration {
     /// API Header
     var requestHeader: [String: String]? { get }
     
+    /// Transform properties in URLRequest object
     func toUrlRequest() -> URLRequest
 }

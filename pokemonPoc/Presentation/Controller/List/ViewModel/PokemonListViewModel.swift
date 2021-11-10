@@ -19,6 +19,7 @@ protocol PokemonListViewModelOutput {
     var status: Observable<PokemonListViewModelStatus> { get }
     var useCase: PokemonListUseCase? { get }
     var pokemonList: [PokemonItemModel]? { get }
+    var errorMessage: String? { get }
 }
 
 enum PokemonListViewModelStatus {
@@ -34,6 +35,7 @@ class PokemonListViewModelDefault: PokemonListViewModel {
     var status: Observable<PokemonListViewModelStatus> = Observable(.none)
     var useCase: PokemonListUseCase?
     var pokemonList: [PokemonItemModel]?
+    var errorMessage: String?
     
     private var pokemon: PokemonsModel?
     private var offset: Int = 0
@@ -61,11 +63,13 @@ extension PokemonListViewModelDefault: PokemonListUseCaseDelegate {
     
     func pokemonLoadingFails(error: CustomError) {
         LOGE("Error")
+        errorMessage = error.localizedDescription
         status.value = .pokemonLoadingFail
     }
     
     func pokemonLoadingSuccess(pokemon: PokemonsModel) {
         LOGD("Success")
+        errorMessage = nil
         self.pokemon = pokemon
         if( pokemonList == nil ) {
             self.pokemonList = [PokemonItemModel]()

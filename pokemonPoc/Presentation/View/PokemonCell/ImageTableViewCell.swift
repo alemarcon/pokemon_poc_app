@@ -47,8 +47,8 @@ class ImageTableViewCell: UITableViewCell {
         
         contentView.addConstraints([
             scrollView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0.0),
-            scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0),
-            scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0),
+            scrollView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
             pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 15.0),
             pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             pageControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5.0)
@@ -59,13 +59,13 @@ class ImageTableViewCell: UITableViewCell {
     
     func setupCell(images: [PokemonImageModel]) {
         pageControl.numberOfPages = images.count
-        pageControl.currentPage = Int(round(scrollView.contentOffset.x / contentView.frame.width))
-        scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: DEFAULT_HEIGHT)
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.size.width * CGFloat(images.count), height: DEFAULT_HEIGHT)
+        scrollView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: DEFAULT_HEIGHT)
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(images.count), height: DEFAULT_HEIGHT)
+        pageControl.currentPage = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
 
         for i in 0 ..< images.count {
             if let imageUrl = URL(string: images[i].url) {
-                let image = UIImageView(frame: CGRect(x: scrollView.frame.width * CGFloat(i), y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
+                let image = UIImageView(frame: CGRect(x: contentView.frame.size.width * CGFloat(i), y: 0, width: contentView.frame.size.width, height: scrollView.frame.height))
                 image.sd_setImage(with: imageUrl, completed: nil)
                 image.contentMode = .scaleAspectFit
                 scrollView.addSubview(image)

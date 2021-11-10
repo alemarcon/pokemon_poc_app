@@ -31,7 +31,7 @@ class PokemonListViewController: BaseViewController {
     
     fileprivate func buildPokemonListUI() {
         view.backgroundColor = .white
-        
+        self.navigationItem.title = NSLocalizedString(Localized.pokemon_list.rawValue, comment: "")
         pokemonTable = UITableView()
         pokemonTable.translatesAutoresizingMaskIntoConstraints = false
         pokemonTable.allowsMultipleSelection = false
@@ -42,8 +42,8 @@ class PokemonListViewController: BaseViewController {
         
         view.addConstraints([
             pokemonTable.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
-            pokemonTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            pokemonTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            pokemonTable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor), //.constraint(equalTo: view.leadingAnchor, constant: 0),
+            pokemonTable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor), //.constraint(equalTo: view.trailingAnchor, constant: 0),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: pokemonTable.bottomAnchor, multiplier: 1.0)
         ])
     }
@@ -60,6 +60,7 @@ class PokemonListViewController: BaseViewController {
                 case .pokemonLoadingFail:
                     LOGE("Pokemon loading fails")
                     self?.hideLoadingActivity()
+                    self?.showCancelAlert(title: NSLocalizedString(Localized.error_title.rawValue, comment: ""), message: viewModel.errorMessage ?? "")
                 case .pokemonLoadingSuccess:
                     self?.hideLoadingActivity()
                     self?.pokemonTable.reloadData()

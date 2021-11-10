@@ -27,8 +27,6 @@ class SplashViewController: BaseViewController {
         }
         
         let nvc: UINavigationController = UINavigationController(rootViewController: controller)
-        nvc.navigationItem.largeTitleDisplayMode = .always
-        nvc.title = "Pokemon List"
         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = nvc
     }
 }

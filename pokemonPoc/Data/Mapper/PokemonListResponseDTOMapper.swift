@@ -9,6 +9,9 @@ import Foundation
 
 struct PokemonListResponseDTOMapper {
     
+    /// Map PokemonListResponseDTO to PokemonsModel
+    /// - Parameter pokemons: PokemonListResponseDTO object to map
+    /// - Returns: PokemonsModel mapped object
     static func mapDtoToModel(pokemons: PokemonListResponseDTO) -> PokemonsModel {
         var model = PokemonsModel()
         
@@ -26,6 +29,9 @@ struct PokemonListResponseDTOMapper {
     }
     
     
+    /// Map PokemonListResponseDTO to PokemonListObject
+    /// - Parameter pokemons: PokemonListResponseDTO object to map
+    /// - Returns: PokemonListObject mapped object
     static func mapDtoToEntity(pokemons: PokemonListResponseDTO) -> PokemonListObject {
         let model = PokemonListObject()
         
@@ -41,40 +47,5 @@ struct PokemonListResponseDTOMapper {
         return model
     }
     
-    
-}
-
-struct PokemonListItemResponseDTOMapper {
-    
-    static func mapDtoArrayToModelArray(pokemon: PokemonListItemDTO) -> PokemonItemModel {
-        var model = PokemonItemModel()
-        
-        if let url = pokemon.url {
-            model.id = getPokemonID(url: url)
-            model.detailUrl = url
-        }
-        model.name = pokemon.name ?? ""
-        
-        
-        return model
-    }
-    
-    static func mapDtoArrayToEntityArray(pokemon: PokemonListItemDTO) -> PokemonItemObject {
-        let model = PokemonItemObject()
-        
-        if let url = pokemon.url {
-            model.pokemonId = getPokemonID(url: url)
-            model.detailUrl = url
-        }
-        model.name = pokemon.name ?? ""
-        
-        
-        return model
-    }
-    
-    private static func getPokemonID(url: String) -> String {
-        let baseUrl = "https://pokeapi.co/api/v2/pokemon/"
-        return url.suffix(from: baseUrl.endIndex).replacingOccurrences(of: "/", with: "")
-    }
     
 }

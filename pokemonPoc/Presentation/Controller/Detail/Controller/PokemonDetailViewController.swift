@@ -27,6 +27,17 @@ class PokemonDetailViewController: BaseViewController {
         super.init(coder: coder)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate { transition in
+            LOGD("Transitions in progress")
+        } completion: { context in
+            if( context.percentComplete == 0.0 ) {
+                self.pokemonDataTable.reloadData()
+            }
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildPokemonDetailUI()
@@ -63,8 +74,8 @@ class PokemonDetailViewController: BaseViewController {
             pokemonName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             pokemonName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             pokemonDataTable.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 15),
-            pokemonDataTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            pokemonDataTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            pokemonDataTable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor), //constraint(equalTo: view.leadingAnchor, constant: 0),
+            pokemonDataTable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),//.constraint(equalTo: view.trailingAnchor, constant: 0),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: pokemonDataTable.bottomAnchor, multiplier: 1.0)
         ])
     }
@@ -81,6 +92,7 @@ class PokemonDetailViewController: BaseViewController {
                 case .pokemonDetailLoadingFail:
                     LOGE("Pokemon loading fails")
                     self?.hideLoadingActivity()
+                    self?.showCancelAlert(title: NSLocalizedString(Localized.error_title.rawValue, comment: ""), message: viewModel.errorMessage ?? "")
                 case .pokemonDetailLoadingSuccess:
                     LOGD("Loading succeded.")
                     self?.hideLoadingActivity()
@@ -115,7 +127,7 @@ extension PokemonDetailViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SECTION_COUNT
+        return viewModel == nil ? 0 : SECTION_COUNT
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -9,6 +9,9 @@ import Foundation
 
 struct PokemonListResponseDBMapper {
     
+    /// Map PokemonListObject object to PokemonsModel object
+    /// - Parameter pokemons: PokemonListObject object to map
+    /// - Returns: PokemonsModel mapped object
     static func mapDtoToModel(pokemons: PokemonListObject) -> PokemonsModel {
         var model = PokemonsModel()
         
@@ -18,21 +21,6 @@ struct PokemonListResponseDBMapper {
         for item in pokemons.pokemon {
             model.pokemonList.append( PokemonListItemResponseDBMapper.mapDtoArrayToModelArray(pokemon: item) )
         }
-        
-        return model
-    }
-    
-}
-
-struct PokemonListItemResponseDBMapper {
-    
-    static func mapDtoArrayToModelArray(pokemon: PokemonItemObject) -> PokemonItemModel {
-        var model = PokemonItemModel()
-        
-        model.id = pokemon.pokemonId
-        model.detailUrl = pokemon.detailUrl
-        model.name = pokemon.name
-        
         
         return model
     }

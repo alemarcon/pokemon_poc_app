@@ -18,6 +18,7 @@ protocol PokemonDetailViewModelOutput {
     var status: Observable<PokemonDetailViewModelStatus> { get }
     var useCase: PokemonDetailUseCase? { get }
     var detail: PokemonDetailModel? { get }
+    var errorMessage: String? { get }
 }
 
 enum PokemonDetailViewModelStatus {
@@ -34,6 +35,7 @@ class PokemonDetailViewModelDefault: PokemonDetailViewModel {
     var status: Observable<PokemonDetailViewModelStatus> = Observable(.none)
     var useCase: PokemonDetailUseCase?
     var detail: PokemonDetailModel?
+    var errorMessage: String?
     private var detailPath: String
     
     init(useCase: PokemonDetailUseCase, detailPath: String) {
@@ -60,10 +62,12 @@ class PokemonDetailViewModelDefault: PokemonDetailViewModel {
 extension PokemonDetailViewModelDefault: PokemonDetailUseCaseDelegate {
     func pokemonDetailsFound(detail: PokemonDetailModel) {
         self.detail = detail
+        errorMessage = nil
         status.value = .pokemonDetailLoadingSuccess
     }
     
     func pokemonDetailsFail(error: CustomError) {
+        errorMessage = error.localizedDescription
         status.value = .pokemonDetailLoadingFail
     }
 }

@@ -14,17 +14,17 @@ protocol PokemonRepository {
     /// DB request
     var dbRequest: PokemonListRequestDB? { get }
     
-    /// <#Description#>
+    /// Get pokemon data
     /// - Parameters:
-    ///   - offset: <#offset description#>
-    ///   - success: <#success description#>
-    ///   - failure: <#failure description#>
+    ///   - offset: The number of pokemons to get
+    ///   - success: Event called in case of success
+    ///   - failure: Event called in case of error
     func getPokemons(offset: String, success: @escaping (PokemonsModel)->Void, failure: @escaping (CustomError)->Void)
     
-    /// <#Description#>
+    /// Get pokemon detail
     /// - Parameters:
-    ///   - path: <#path description#>
-    ///   - success: <#success description#>
-    ///   - failure: <#failure description#>
+    ///   - path: Detail path for desired pokemon
+    ///   - success: Event called on success
+    ///   - failure: Event called on error
     func getPokemonDetail(path: String, success: @escaping (PokemonDetailModel)->Void, failure: @escaping (CustomError)->Void)
 }

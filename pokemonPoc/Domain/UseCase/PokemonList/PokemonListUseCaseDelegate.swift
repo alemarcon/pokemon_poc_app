@@ -9,11 +9,11 @@ import Foundation
 
 protocol PokemonListUseCaseDelegate {
     
-    /// Delegate method called in case of best player call fails
+    /// Delegate method called in case of pokemon loading fails
     /// - Parameter error: The error occurred
     func pokemonLoadingFails(error: CustomError)
     
-    /// Delegate method called in case of success of best player success
-    /// - Parameter players: Array object of UserModel
+    /// Delegate method called in case of success of pokemon loading
+    /// - Parameter players: Pokemon list
     func pokemonLoadingSuccess(pokemon: PokemonsModel)
 }

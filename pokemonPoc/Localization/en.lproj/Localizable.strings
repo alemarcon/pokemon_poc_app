@@ -18,3 +18,5 @@
 "image" = "Images";
 "stats" = "Statistics";
 "cat" = "Categories";
+"error_title" = "Error";
+"pokemon_list" = "Pokemon List";

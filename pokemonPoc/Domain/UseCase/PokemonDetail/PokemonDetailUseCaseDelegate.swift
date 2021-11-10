@@ -9,6 +9,11 @@ import Foundation
 
 protocol PokemonDetailUseCaseDelegate {
     
+    /// Delegate method called in case of details found
+    /// - Parameter detail: Pokemon details
     func pokemonDetailsFound(detail: PokemonDetailModel)
+    
+    /// Delegate method called in case of error
+    /// - Parameter error: The error occurred
     func pokemonDetailsFail(error: CustomError)
 }

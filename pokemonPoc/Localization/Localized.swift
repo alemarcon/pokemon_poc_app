@@ -21,4 +21,6 @@ enum Localized: String, CaseIterable {
     case image
     case stats
     case cat
+    case error_title
+    case pokemon_list
 }

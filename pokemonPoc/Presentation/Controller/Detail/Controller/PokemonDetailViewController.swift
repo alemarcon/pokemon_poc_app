@@ -13,6 +13,11 @@ class PokemonDetailViewController: BaseViewController {
     var pokemonDataTable: UITableView!
     var viewModel: PokemonDetailViewModel?
     
+    private let SECTION_COUNT = 3
+    private let IMAGE_SECTION = 0
+    private let STATS_SECTION = 1
+    private let CATEGORY_SECTION = 2
+    
     init(viewModel: PokemonDetailViewModel) {
         super.init()
         self.viewModel = viewModel
@@ -21,14 +26,14 @@ class PokemonDetailViewController: BaseViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildPokemonDetailUI()
         bindViewModel()
         viewModel?.loadPokemonDetail()
     }
-
+    
     fileprivate func buildPokemonDetailUI() {
         view.backgroundColor = .white
         
@@ -46,11 +51,14 @@ class PokemonDetailViewController: BaseViewController {
         pokemonDataTable.translatesAutoresizingMaskIntoConstraints = false
         pokemonDataTable.allowsMultipleSelection = false
         pokemonDataTable.dataSource = self
+//        pokemonDataTable.delegate = self
         pokemonDataTable.rowHeight = UITableView.automaticDimension
         pokemonDataTable.estimatedRowHeight = 44.0
+        pokemonDataTable.showsVerticalScrollIndicator = false
         pokemonDataTable.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.IDENTIFIER)
+        pokemonDataTable.register(TextualTableViewCell.self, forCellReuseIdentifier: TextualTableViewCell.IDENTIFIER)
         view.addSubview(pokemonDataTable)
-
+        
         view.addConstraints([
             pokemonName.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
             pokemonName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
@@ -95,28 +103,85 @@ class PokemonDetailViewController: BaseViewController {
 extension PokemonDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.detail?.items.count ?? 0
+        switch section {
+        case IMAGE_SECTION:
+            return viewModel?.detail?.images != nil ? 1 : 0
+        case STATS_SECTION:
+            return viewModel?.detail?.stats.count ?? 0
+        case CATEGORY_SECTION:
+            return viewModel?.detail?.category.count ?? 0
+        default:
+            return 0
+        }
     }
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SECTION_COUNT
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case IMAGE_SECTION:
+            return NSLocalizedString(Localized.image.rawValue, comment: "")
+        case STATS_SECTION:
+            return NSLocalizedString(Localized.stats.rawValue, comment: "")
+        case CATEGORY_SECTION:
+            return NSLocalizedString(Localized.cat.rawValue, comment: "")
+        default:
+            return nil
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let item = viewModel?.detail?.items[indexPath.row] {
-            switch item.type {
-            case .unknow:
-                return UITableViewCell()
-            case .image:
+
+        switch indexPath.section {
+        case IMAGE_SECTION:
+            if let items = viewModel?.detail?.images {
                 guard let currentCell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.IDENTIFIER, for: indexPath) as? ImageTableViewCell else {
                     return UITableViewCell()
                 }
-                currentCell.setupCell(images: item as! PokemonImageModel)
+                currentCell.setupCell(images: items)
                 return currentCell
-            case .stats:
-                return UITableViewCell()
-            case .category:
+            } else {
                 return UITableViewCell()
             }
-        } else {
+        case STATS_SECTION:
+            if let item = viewModel?.detail?.stats[indexPath.row] {
+                if( item.type == .stats ) {
+                    guard let currentCell = tableView.dequeueReusableCell(withIdentifier: TextualTableViewCell.IDENTIFIER, for: indexPath) as? TextualTableViewCell else {
+                        return UITableViewCell()
+                    }
+                    currentCell.setup(item: item)
+                    return currentCell
+                } else {
+                    return UITableViewCell()
+                }
+            } else {
+                return UITableViewCell()
+            }
+        case CATEGORY_SECTION:
+            if let item = viewModel?.detail?.category[indexPath.row] {
+                if( item.type == .category ) {
+                    guard let currentCell = tableView.dequeueReusableCell(withIdentifier: TextualTableViewCell.IDENTIFIER, for: indexPath) as? TextualTableViewCell else {
+                        return UITableViewCell()
+                    }
+                    currentCell.setup(item: item)
+                    return currentCell
+                } else {
+                    return UITableViewCell()
+                }
+            } else {
+                return UITableViewCell()
+            }
+        default:
             return UITableViewCell()
         }
     }
     
 }
+
+//extension PokemonDetailViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: false)
+//    }
+//}

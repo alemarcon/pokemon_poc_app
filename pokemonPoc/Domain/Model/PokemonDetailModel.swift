@@ -9,11 +9,17 @@ import Foundation
 
 struct PokemonDetailModel {
     var name: String
-    var items: [DetailItem]
+    var images: [PokemonImageModel]
+    var stats: [PokemonStatModel]
+    var category: [PokemonTypeModel]
+//    var items: [DetailItem]
     
     init() {
         name = ""
-        items = [DetailItem]()
+        images = [PokemonImageModel]()
+        stats = [PokemonStatModel]()
+        category = [PokemonTypeModel]()
+//        items = [DetailItem]()
     }
     
 }

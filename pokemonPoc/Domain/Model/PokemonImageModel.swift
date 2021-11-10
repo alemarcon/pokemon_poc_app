@@ -7,12 +7,12 @@
 
 import Foundation
 
-class PokemonImageModel: DetailItem {
+struct PokemonImageModel: DetailItem {
     var type: DetailType
-    var url: [String]
+    var url: String
     
     init() {
         type = .image
-        url = [String]()
+        url = ""
     }
 }

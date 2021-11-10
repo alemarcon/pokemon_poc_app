@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PokemonStatModel: DetailItem {
+struct PokemonStatModel: DetailItem {
     var type: DetailType
     var baseStat: Int
     var statName: String

@@ -18,4 +18,7 @@ enum Localized: String, CaseIterable {
     case offline_error
     case database_save_error
     case no_saved_data_found
+    case image
+    case stats
+    case cat
 }

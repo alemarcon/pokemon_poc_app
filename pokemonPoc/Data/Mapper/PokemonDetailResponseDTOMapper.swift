@@ -16,29 +16,35 @@ struct PokemonDetailResponseDTOMapper {
         
         if let sprites = dto.sprites {
             
-            let images = PokemonImageModel()
-            
             if let frontDefault = sprites.frontDefault {
-                images.url.append(frontDefault)
+                var image = PokemonImageModel()
+                image.url = frontDefault
+                model.images.append(image)
             }
             if let backDefault = sprites.backDefault {
-                images.url.append(backDefault)
+                var image = PokemonImageModel()
+                image.url = backDefault
+                model.images.append(image)
             }
             if let frontShiny = sprites.frontShiny {
-                images.url.append(frontShiny)
+                var image = PokemonImageModel()
+                image.url = frontShiny
+                model.images.append(image)
             }
             if let backShiny = sprites.backShiny {
-                images.url.append(backShiny)
+                var image = PokemonImageModel()
+                image.url = backShiny
+                model.images.append(image)
             }
-            model.items.append(images)
+//            model.items.append(images)
         }
         
         if let stats = dto.stats {
-            model.items.append(contentsOf: PokemonStatResponseDTOMapper.mapDtoArrayToModelArray(dtos: stats))
+            model.stats.append(contentsOf: PokemonStatResponseDTOMapper.mapDtoArrayToModelArray(dtos: stats))
         }
         
         if let types = dto.types {
-            model.items.append(contentsOf: PokemonTypeElementResponseDTOMapper.mapDtoArrayToModelArray(dtos: types))
+            model.category.append(contentsOf: PokemonTypeElementResponseDTOMapper.mapDtoArrayToModelArray(dtos: types))
         }
         
         return model
@@ -50,7 +56,7 @@ struct PokemonDetailResponseDTOMapper {
 struct PokemonStatResponseDTOMapper {
     
     static func mapDtoToModel(dto: PokemonStatsResponseDTO) -> PokemonStatModel {
-        let model = PokemonStatModel()
+        var model = PokemonStatModel()
         
         model.type = .stats
         model.baseStat = dto.baseStat ?? 0

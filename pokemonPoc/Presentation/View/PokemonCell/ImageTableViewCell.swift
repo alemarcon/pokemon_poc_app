@@ -18,16 +18,10 @@ class ImageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    override func prepareForReuse() {
-        scrollView = UIScrollView()
-        pageControl = UIPageControl()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -59,15 +53,18 @@ class ImageTableViewCell: UITableViewCell {
             pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             pageControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5.0)
         ])
+        
+        self.selectionStyle = .none
     }
     
-    func setupCell(images: PokemonImageModel) {
-        pageControl.numberOfPages = images.url.count
+    func setupCell(images: [PokemonImageModel]) {
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = Int(round(scrollView.contentOffset.x / contentView.frame.width))
         scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: DEFAULT_HEIGHT)
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.size.width * CGFloat(images.url.count), height: DEFAULT_HEIGHT)
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.size.width * CGFloat(images.count), height: DEFAULT_HEIGHT)
 
-        for i in 0 ..< images.url.count {
-            if let imageUrl = URL(string: images.url[i]) {
+        for i in 0 ..< images.count {
+            if let imageUrl = URL(string: images[i].url) {
                 let image = UIImageView(frame: CGRect(x: scrollView.frame.width * CGFloat(i), y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
                 image.sd_setImage(with: imageUrl, completed: nil)
                 image.contentMode = .scaleAspectFit
